@@ -103,3 +103,6 @@ if __name__ == "__main__":
     fig1.show()
 
     plt.show(block=True)
+
+    np.savetxt("data/reference.xyz", ref, delimiter=" ")
+    np.savetxt("data/data02.xyz", transformed_data, delimiter=" ")
