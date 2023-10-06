@@ -22,8 +22,8 @@ if __name__ == "__main__":
     data = data02_object        # Here to test qualitycheck with the flawless model
     # data = data03_object      # Here uncomment to test qualitycheck with the misshapen model
     
-    print('Reference size : '+str(ref.shape))
-    print('Raw data  size : '+str(data.shape))
+    print('Reference size : ' + str(ref.shape))
+    print('Raw data  size : ' + str(data.shape))
     
 
 
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     matrix = np.eye(4,4)             # Transformation matrix returned by icp function
     errors = np.zeros((1,100))  # Error value for each iteration of ICP
     iterations = 100            # The total number of iterations applied by ICP
-    total_time=0                # Total time of convergence of ICP
+    total_time = 0                # Total time of convergence of ICP
 
     # ------- YOUR TURN HERE -------- 
 
