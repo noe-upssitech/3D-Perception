@@ -19,8 +19,8 @@ if __name__ == "__main__":
     data03_object = datatools.load_XYZ_data_to_vec('data/data03_object.xyz')
 
     ref = model
-    data = data02_object        # Here to test qualitycheck with the flawless model
-    # data = data03_object      # Here uncomment to test qualitycheck with the misshapen model
+    # data = data02_object        # Here to test qualitycheck with the flawless model
+    data = data03_object      # Here uncomment to test qualitycheck with the misshapen model
     
     print('Reference size : ' + str(ref.shape))
     print('Raw data  size : ' + str(data.shape))
@@ -105,4 +105,4 @@ if __name__ == "__main__":
     plt.show(block=True)
 
     np.savetxt("data/reference.xyz", ref, delimiter=" ")
-    np.savetxt("data/data02.xyz", transformed_data, delimiter=" ")
+    np.savetxt("data/data03.xyz", transformed_data, delimiter=" ")
