@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     # ------- YOUR TURN HERE -------- 
 
-    T, errors, it, total_time = icp.icp(data, ref)
+    matrix, errors, it, total_time = icp.icp(data, ref)
 
     # ------- YOUR TURN HERE -------- 
     
@@ -58,10 +58,10 @@ if __name__ == "__main__":
     # Apply transformation found with ICP to data:
     #
     # EXAMPLE of how to apply a homogeneous transformation to a set of points
-    
+    """
     # (1) Make a homogeneous representation of the model to transform
-    homogeneous_model = np.ones((model.shape[0], 4))   ##### Construct a [N,4] matrix
-    homogeneous_model[:,0:3] = np.copy(model)                   ##### Replace the X,Y,Z columns with the model points
+    homogeneous_model = np.ones((data.shape[0], 4))   ##### Construct a [N,4] matrix
+    homogeneous_model[:,0:3] = np.copy(data)                   ##### Replace the X,Y,Z columns with the model points
     # (2) Construct the R|t homogeneous transformation matrix / here a rotation of 36 degrees around x axis
     theta = np.radians(36)
     c, s = np.cos(theta), np.sin(theta)
@@ -73,9 +73,17 @@ if __name__ == "__main__":
     transformed_model = np.dot(homogeneous_matrix, homogeneous_model.T).T
     # (4) Remove the homogeneous coordinate
     transformed_model = np.delete(transformed_model, 3, 1)
-    
+    """
 
     # ------- YOUR TURN HERE -------- 
+
+    homogeneous_data = np.ones((data.shape[0], 4))
+    homogeneous_data[:,0:3] = np.copy(data)
+
+    transformed_data = np.dot(matrix, homogeneous_data.T).T
+
+    transformed_data = np.delete(transformed_data, 3, 1)
+    
 
     ##########################################################################
     # Results display:
@@ -83,15 +91,15 @@ if __name__ == "__main__":
     ax = fig.add_subplot(133, projection='3d')
     
     #### Draw transformed data and reference:
-    datatools.draw_data_and_ref(data, ref, title='Registered data', ax=ax)
+    datatools.draw_data_and_ref(transformed_data, ref, title='Registered data', ax=ax)
     
     #### Display error progress over time
     fig1 = plt.figure(2, figsize=(20,3))
-    it = np.arange(0,len(errors),1)
+    it = np.arange(0, len(errors), 1)
     plt.plot(it, errors)
     plt.ylabel('Residual distance')
     plt.xlabel('Iterations')
-    plt.title('Total elapsed time :'+str(total_time)+' s.')
+    plt.title('Total elapsed time :' + str(total_time) + ' s.')
     fig1.show()
 
     plt.show(block=True)
