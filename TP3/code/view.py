@@ -13,6 +13,8 @@ class View:
     def __init__(self, image_path, root_path, feature_path):
 
         self.name = image_path[image_path.rfind('\\') + 1:-4]  # image name without extension
+        self.parent_file = image_path[:-8]
+        self.basename = os.path.basename(image_path)
         self.image = cv2.imread(image_path)  # numpy array of the image
         self.keypoints = []  # list of keypoints obtained from feature extraction
         self.descriptors = []  # list of descriptors obtained from feature extraction
@@ -21,11 +23,11 @@ class View:
         self.t = np.zeros((3, 1), dtype=float)  # translation vector for the view
 
         if not feature_path:
-            self.extract_features()
+            self.extract_features(self.parent_file + 'result_sift/' + self.basename)
         #else:
         #    self.read_features()
 
-    def extract_features(self):
+    def extract_features(self, img_name : str):
         """Extracts features from the image"""
 
         print("Using SIFT features")
@@ -36,6 +38,18 @@ class View:
         ## 2.1.1 - Compute SIFT descriptors and keypoints
         ## 2.1.2 - Display the descriptors in the image and store the result
         ## INSERT YOUR CODE HERE !!!!
+
+        # Compute SIFT descriptors and keypoints
+
+        self.keypoints, self.descriptors = detector.detectAndCompute(self.image, None)
+
+        img = cv2.drawKeypoints(self.image, self.keypoints, self.image)
+        print(self.getNbKeypoints())
+        cv2.imwrite(img_name, img)
+
+    def getNbKeypoints(self):
+        """Returns the number of keypoints"""
+        return len(self.keypoints)
 
 
 def create_views(root_path):

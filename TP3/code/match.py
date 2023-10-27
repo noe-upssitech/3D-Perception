@@ -40,6 +40,10 @@ class Match:
         ## 2.2.1 - Display matches and store the result
         ## INSERT YOUR CODE HERE !!!!
 
+        # Display matches
+        img = cv2.drawMatches(view1.image, view1.keypoints, view2.image, view2.keypoints, matches, None, flags=2)
+        cv2.imwrite(view1.parent_file + 'result_matches/' + view1.basename[:-4] + '_' + view2.basename[:-4] + '.jpg', img)
+
 
 def create_matches(views):
     """Computes matches between every possible pair of views and stores in a dictionary"""

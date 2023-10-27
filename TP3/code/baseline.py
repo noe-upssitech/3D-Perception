@@ -22,6 +22,8 @@ class Baseline:
         ## INSERT YOUR CODE HERE !!!!
         E = np.array([0,0,0],[0,0,0],[0,0,0])
 
+        E = K.T.dot(F).dot(K)
+
         return self.check_pose(E, K)
 
     def check_pose(self, E, K):

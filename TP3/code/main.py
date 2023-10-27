@@ -23,5 +23,5 @@ def run(root_dir):
     sfm.reconstruct()
 
 if __name__ == '__main__':
-    root_dir = "../barcelona"
+    root_dir = "/mnt/sda1/Upssitech/3A/Perception3D/TP3/inputs"
     run(root_dir)

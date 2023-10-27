@@ -66,6 +66,8 @@ def get_camera_from_E(E):
     ## 3.2 - Compute R1, R2, t1, t2 from essential matrix E
     ## INSERT YOUR CODE HERE !!!!
 
+    np.linalg.svd(E)
+
     return R1, R2, t1, t2
 
 
