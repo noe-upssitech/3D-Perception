@@ -44,7 +44,7 @@ class View:
         self.keypoints, self.descriptors = detector.detectAndCompute(self.image, None)
 
         img = cv2.drawKeypoints(self.image, self.keypoints, self.image)
-        print(self.getNbKeypoints())
+        # print(self.getNbKeypoints())
         cv2.imwrite(img_name, img)
 
     def getNbKeypoints(self):

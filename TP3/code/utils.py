@@ -49,8 +49,9 @@ def calculate_reprojection_error(point_3D, point_2D, K, R, t):
     error = 0
     ##########################################################
     ## 5.1 - Compute reprojection error    
-    ## INSERT YOUR CODE HERE !!!!
+
     
+
     return error
 
 
@@ -64,9 +65,15 @@ def get_camera_from_E(E):
 
     ############################################################
     ## 3.2 - Compute R1, R2, t1, t2 from essential matrix E
-    ## INSERT YOUR CODE HERE !!!!
+    u, _, v = np.linalg.svd(E)
 
-    np.linalg.svd(E)
+    w = np.array([[0, -1, 0], [1, 0, 0], [0, 0, 1]])
+    R1 = np.dot(np.dot(u, w), v.T)
+    R2 = np.dot(np.dot(u, w.T), v.T)
+
+    t1 = u[:, -1].reshape((3,1))
+    t1 = np.dot(u, np.array(([0,0,1])).T)
+    t2 = -t1
 
     return R1, R2, t1, t2
 

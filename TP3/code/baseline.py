@@ -19,10 +19,8 @@ class Baseline:
 
         #########################################################
         ## 3.1 - Compte the Essential matrix from the fundamental matrix
-        ## INSERT YOUR CODE HERE !!!!
-        E = np.array([0,0,0],[0,0,0],[0,0,0])
 
-        E = K.T.dot(F).dot(K)
+        E = K.T @ F @ K
 
         return self.check_pose(E, K)
 
